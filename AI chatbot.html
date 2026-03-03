@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI - Educational Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-brain"></i> EduAI</h2>
+                <p class="subtitle">AI Tutor Assistant</p>
+            </div>
+            <button class="new-chat-btn" onclick="startNewChat()">
+                <i class="fas fa-plus"></i> New Chat
+            </button>
+            <div class="chat-history">
+                <h3>Recent Chats</h3>
+                <div id="chatHistory"></div>
+            </div>
+            <div class="sidebar-footer">
+                <p>For Educational Use</p>
+                <small>© 2026 BSCIT Project</small>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-main">
+            <div class="chat-container">
+                <!-- Header -->
+                <div class="chat-header">
+                    <div class="header-info">
+                        <h1>EduAI Assistant</h1>
+                        <p>Ask questions about any subject</p>
+                    </div>
+                    <button class="settings-btn" onclick="toggleSettings()">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+
+                <!-- Settings Panel -->
+                <div class="settings-panel" id="settingsPanel" style="display: none;">
+                    <div class="settings-content">
+                        <h3>Settings</h3>
+                        <div class="setting-item">
+                            <label for="subjectSelect">Select Subject:</label>
+                            <select id="subjectSelect">
+                                <option value="general">General Knowledge</option>
+                                <option value="math">Mathematics</option>
+                                <option value="science">Science</option>
+                                <option value="english">English</option>
+                                <option value="coding">Coding & Programming</option>
+                                <option value="history">History</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="difficultySelect">Difficulty Level:</label>
+                            <select id="difficultySelect">
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                        <button class="close-settings" onclick="toggleSettings()">Close</button>
+                    </div>
+                </div>
+
+                <!-- Chat Messages Area -->
+                <div class="chat-messages" id="chatMessages">
+                    <div class="welcome-section">
+                        <div class="welcome-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h2>Welcome to EduAI</h2>
+                        <p>Your personal AI tutor for learning and education</p>
+                        <div class="quick-prompts">
+                            <button class="prompt-btn" onclick="sendQuickPrompt('Explain photosynthesis')">
+                                <i class="fas fa-leaf"></i> Biology
+                            </button>
+                            <button class="prompt-btn" onclick="sendQuickPrompt('Solve quadratic equations')">
+                                <i class="fas fa-calculator"></i> Math
+                            </button>
+                            <button class="prompt-btn" onclick="sendQuickPrompt('What is machine learning?')">
+                                <i class="fas fa-robot"></i> AI
+                            </button>
+                            <button class="prompt-btn" onclick="sendQuickPrompt('Explain data structures')">
+                                <i class="fas fa-code"></i> Programming
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="chat-input-area">
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="userInput" 
+                            placeholder="Type your question here..." 
+                            onkeypress="handleKeyPress(event)"
+                            autocomplete="off"
+                        >
+                        <button class="send-btn" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="char-count">
+                        <span id="charCount">0</span>/500
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for API Key Setup -->
+    <div class="modal" id="apiKeyModal">
+        <div class="modal-content">
+            <h2>API Key Configuration</h2>
+            <p>Enter your API key to enable AI responses</p>
+            <input type="password" id="apiKeyInput" placeholder="Paste your API key here">
+            <div class="button-group">
+                <button onclick="saveAPIKey()" class="btn-primary">Save</button>
+                <button onclick="skipAPIKey()" class="btn-secondary">Continue Without AI</button>
+            </div>
+            <small>Your API key is stored locally and never sent to external servers</small>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
